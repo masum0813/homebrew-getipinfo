@@ -14,7 +14,7 @@ class Getipinfo < Formula
     # ENV.deparallelize  # if your formula fails when building in parallel
     system "go", "build", *std_go_args(ldflags: "-s -w")
 
-    bin.install 'gitstart'
+    bin.install 'getipinfo'
     prefix.install "README.md"
     prefix.install "LICENSE" 
 
