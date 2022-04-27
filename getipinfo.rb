@@ -4,8 +4,8 @@
 class Getipinfo < Formula
   desc "Get ip address with Golang on your computer/system "
   homepage "https://github.com/masum0813/getipinfo/"
-  url "https://github.com/masum0813/getipinfo/archive/refs/tags/v0.0.10.tar.gz"
-  sha256 "a436a4c95b33cc413398e93ebef9bb0c7011662a55850affd65b28dc892a653b"
+  url "https://github.com/masum0813/getipinfo/archive/refs/tags/v0.1.0.tar.gz"
+  sha256 "f6cb998e3f0ffd0195a4ca6212c9e2269397f8f84b29456d8f5285a04cc907a2"
   license "MIT"
 
   depends_on "go" => :build
@@ -15,8 +15,10 @@ class Getipinfo < Formula
     system "go", "build", *std_go_args(ldflags: "-s -w")
 
     bin.install 'getipinfo'
+    bin.install Dir["lib"]
+    bin.install Dir["files"]
     prefix.install "README.md"
-    prefix.install "LICENSE" 
+    prefix.install "LICENSE"
 
   end
 
@@ -30,6 +32,7 @@ class Getipinfo < Formula
     #
     # The installed folder is not in the path, so use the entire path to any
     # executables being tested: `system "#{bin}/program", "do", "something"`.
-    system "#{bin}/getipinfo", "version"
+    output = shell_output(bin/"getipinfo version")
+    assert output.include? "getipinfo version 0.0.10"
   end
 end
